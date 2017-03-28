@@ -1,7 +1,7 @@
 {
   "name": "vue-state-management-alternative",
   "version": "1.0.0",
-  "description": "Alternative state management for Vue 2.x",
+  "description": "Alternative state management for Vue",
   "scripts": {
     "start": "vue build src/App.vue",
     "build": "vue build src/App.vue --prod --config vue-build.config.js"

@@ -1,19 +1,22 @@
-# Vue 另类状态管理
+# Alternative state management for Vue
 
-我们都知道 Vue2 移除了 `.sync`，在一定程度上会造成不便  
-尤其是对于 `prop` 传递深度较浅的情况下，确实会多写一些代码  
-文档提到用 `v-model` 在组件上实现[双向绑定](http://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events)，也实在是太鸡肋了  
-官方推荐使用 Vuex，但对于**独立封装**的组件，一般是不应该引入的  
-业界推崇 `单向数据流` 最佳实践，但也要权衡开发效率、易维护性与直观性
+> [Chinese README - 中文说明](./README-CN.md)
 
-在参阅了文档中的
+`.sync` is deprecated in Vue 2.x, which may be inconvenient in a way  
+Especially for the case that `prop` passed shallowly, you may have to write more code  
+The docs mention using `v-model` as a [hack](http://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events) which sounds hardly elegant  
+Also, the official solution `Vuex` is not suitable for independent components  
+We all know **one-way data flow** is a best practice  
+but development efficiency, maintainability, simple and straight-forward should all be taken into consideration
 
-* [data 必须是函数](http://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function)
-* [状态管理](http://vuejs.org/v2/guide/state-management.html)
+After reviewing the below contents of the docs:
 
-我们可以另辟蹊径，自行实现出简易另类的状态管理  
+* [`data` Must Be a Function](http://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function)
+* [State Management](http://vuejs.org/v2/guide/state-management.html)
 
-先来看看 `src/props.js`：
+We can implement an awesome state management solution ourselves
+
+Firstly, Take a look at `src/props.js`:
 
 ```js
 const props = { todos: [], counter: 0 }
@@ -26,7 +29,7 @@ export const inc = () => props.counter++
 export const dec = () => props.counter--
 ```
 
-应用到如下组件树中：
+Then, apply to the component tree below:
 
 ```
 App
@@ -36,13 +39,13 @@ App
       └─ Grandchild2
 ```
 
-最终结果见[在线 demo](https://kenberkeley.github.io/vue-state-management-alternative/dist/)  
+Finally we get an [online demo](https://kenberkeley.github.io/vue-state-management-alternative/dist/)  
 
-> 本方式适用于 Vue 1.x / 2.x
+> This solution is applicable for Vue 1.x / 2.x
 
 ***
 
-### 本地测试
+### Test it yourself
 
 ```
 $ git clone https://github.com/kenberkeley/vue-state-management-alternative.git
