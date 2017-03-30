@@ -38,6 +38,7 @@ App
 
 最终结果见[在线 demo](https://kenberkeley.github.io/vue-state-management-alternative/dist/)  
 
+> 建议进入 [`src/`](./src) 了解如何使用  
 > 本方式适用于 Vue 1.x / 2.x
 
 ***

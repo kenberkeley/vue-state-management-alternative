@@ -41,6 +41,7 @@ App
 
 Finally we get an [online demo](https://kenberkeley.github.io/vue-state-management-alternative/dist/)  
 
+> It's highly suggested to dive into [`src/`](./src) to learn about how to use it  
 > This solution is applicable for Vue 1.x / 2.x
 
 ***
