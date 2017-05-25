@@ -2,9 +2,9 @@
 
 > [Chinese README - 中文说明](./README-CN.md)
 
-`.sync` is deprecated in Vue 2.x, which may be inconvenient in a way  
-Especially for the case that `prop` passed shallowly, you may have to write more code  
-The docs mention using `v-model` as a [hack](http://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events) which sounds hardly elegant  
+`.sync` is deprecated in Vue 2.x (**UPDATE:** a castration edition is back in `v2.3`)  
+Especially for the case that `props` passed shallowly, you have to write more verbose code  
+The docs mentioned using `v-model` as a [hack](http://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events) which sounds hardly elegant  
 Also, the official solution `Vuex` is not suitable for independent components  
 We all know **one-way data flow** is a best practice  
 but development efficiency, maintainability, simple and straight-forward should all be taken into consideration
@@ -16,17 +16,50 @@ After reviewing the below contents of the docs:
 
 We can implement an awesome state management solution ourselves
 
-Firstly, Take a look at `src/props.js`:
+Firstly, Take a look at `src/sharedState.mixin.js`:
 
 ```js
-const props = { todos: [], counter: 0 }
-export default props
+// The magic of state persistance is closure here
+export const sharedState = {
+  todos: [],
+  counter: 0
+}
 
-export const resetTodos = () => props.todos = []
-export const resetCounter = () => props.counter = 0
-export const addTodo = (s) => props.todos.push(s)
-export const inc = () => props.counter++
-export const dec = () => props.counter--
+export const resetTodos = () => sharedState.todos = []
+export const resetCounter = () => sharedState.counter = 0
+export const addTodo = (s) => sharedState.todos.push(s)
+export const inc = () => sharedState.counter++
+export const dec = () => sharedState.counter--
+
+/**
+ * @exports.default {Mixin}
+ */
+export default {
+  data: () => ({
+    sharedState
+  }),
+  methods: {
+    resetTodos,
+    resetCounter,
+    addTodo,
+    inc,
+    dec
+  }
+}
+
+/*
+
+  You can access the shared state and methods
+  not only within Vue component (as mixins) but also in common js files
+
+  ※ e.g.
+  import { sharedState, inc } from '<path to>/sharedState.mixin'
+  
+  console.info(sharedState.counter) // 0
+  inc()
+  console.info(sharedState.counter) // 1
+ 
+ */
 ```
 
 Then, apply to the component tree below:

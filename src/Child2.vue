@@ -5,17 +5,17 @@
     <button @click="addTodo('child2')">todos.push('child2')</button>
     <button @click="dec">counter--</button>
     <br><br>
-    <grandchild2></grandchild2>
+    <grandchild2 />
   </fieldset>
 </template>
 <script>
-import props$, { addTodo, dec } from '../props'
-import Grandchild2 from './children/Grandchild2'
+import sharedStateMixin from './sharedState.mixin'
+import Grandchild2 from './Grandchild2'
 
 export default {
   name: 'Child2',
+  mixins: [sharedStateMixin],
   components: { Grandchild2 },
-  data: () => ({ me: 'child2', props$ }),
-  methods: { addTodo, dec }
+  data: () => ({ me: 'child2' })
 }
 </script>

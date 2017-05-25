@@ -7,11 +7,11 @@
   </fieldset>
 </template>
 <script>
-import props$, { addTodo, dec } from '../../props'
+import sharedStateMixin from './sharedState.mixin'
 
 export default {
   name: 'Grandchild2',
-  data: () => ({ me: 'grandchild2', props$ }),
-  methods: { addTodo, dec }
+  mixins: [sharedStateMixin],
+  data: () => ({ me: 'grandchild2' })
 }
 </script>
